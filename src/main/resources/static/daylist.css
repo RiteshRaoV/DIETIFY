@@ -117,3 +117,26 @@ header{
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.calendar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.week {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+}
+
+.days {
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: none; /* Hide all days by default */
+}
+
+#week1 {
+  display: block; /* Show Week 1 days by default */
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/daylist.css}">
+</head>
+<body>
+    <h2>Meals of the week</h2>
+    <div class="calendar">
+        <div class="week" onclick="showDays('week1')"> Monday</div>
+        <div class="week" onclick="showDays('week2')">Tuesday</div>
+        <div class="week" onclick="showDays('week3')">Wednesady</div>
+        <div class="week" onclick="showDays('week4')">Thursday</div>
+        <div class="week" onclick="showDays('week5')">Friday</div>
+        <div class="week" onclick="showDays('week6')">Saturday</div>
+        <div class="week" onclick="showDays('week7')">Sunday</div>
+    </div>
+
+    <div id="week1" class="days" >
+    
+       
+          <div class="page-container">
+            <div class="row">
+              <div class="column-3" th:each="meal : ${weekresponse.week.monday.meals}">
+                <div class="recipe-card">
+                  <div class="recipe-image">
+                    <img th:src="${meal.sourceUrl}" th:alt="${meal.title}">
+                  </div>
+                  <div class="recipe-top">
+                    <h1 th:text="${meal.title}"></h1>
+                  </div>
+                  <div class="recipe-bottom3">
+                    <div class="recipe-info">Servings: <span th:text="${meal.servings}"></span></div>
+                    <div class="recipe-info">Total Time: <span th:text="${meal.readyInMinutes}"></span></div>
+                    <a th:href="@{/recipe/details}" class="button3">VIEW RECIPE 🍳</a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </div>
+    <div id="week2" class="days" style="display: none;">
+
+        
+          <div class="page-container">
+            <div class="row">
+              <div class="column-3" th:each="meal : ${weekresponse.week.tuesday.meals}">
+                <div class="recipe-card">
+                  <div class="recipe-image">
+                    <img th:src="${meal.sourceUrl}" th:alt="${meal.title}">
+                  </div>
+                  <div class="recipe-top">
+                    <h1 th:text="${meal.title}"></h1>
+                  </div>
+                  <div class="recipe-bottom3">
+                    <div class="recipe-info">Servings: <span th:text="${meal.servings}"></span></div>
+                    <div class="recipe-info">Total Time: <span th:text="${meal.readyInMinutes}"></span></div>
+                    <a th:href="@{/recipe/details}" class="button3">VIEW RECIPE 🍳</a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+    
+    </div>
+    <div id="week3" class="days" style="display: none;">
+    
+        
+          <div class="page-container">
+            <div class="row">
+              <div class="column-3" th:each="meal : ${weekresponse.week.wednesday.meals}">
+                <div class="recipe-card">
+                  <div class="recipe-image">
+                    <img th:src="${meal.sourceUrl}" th:alt="${meal.title}">
+                  </div>
+                  <div class="recipe-top">
+                    <h1 th:text="${meal.title}"></h1>
+                  </div>
+                  <div class="recipe-bottom3">
+                    <div class="recipe-info">Servings: <span th:text="${meal.servings}"></span></div>
+                    <div class="recipe-info">Total Time: <span th:text="${meal.readyInMinutes}"></span></div>
+                    <a th:href="@{/recipe/details}" class="button3">VIEW RECIPE 🍳</a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </div>
+    
+    <div id="week4" class="days" style="display: none;">
+    
+        <div class="heading">
+            <h1 class="heading_1"> Here is delicious recipes  </h1>
+            <h1 class="heading_2">suggestion based on your </h1>
+            <h1 class="heading_3">dietary preferences</h1>
+          </div>
+          <div class="page-container">
+            <div class="row">
+              <div class="column-3" th:each="meal : ${weekresponse.week.thursday.meals}">
+                <div class="recipe-card">
+                  <div class="recipe-image">
+                    <img th:src="${meal.sourceUrl}" th:alt="${meal.title}">
+                  </div>
+                  <div class="recipe-top">
+                    <h1 th:text="${meal.title}"></h1>
+                  </div>
+                  <div class="recipe-bottom3">
+                    <div class="recipe-info">Servings: <span th:text="${meal.servings}"></span></div>
+                    <div class="recipe-info">Total Time: <span th:text="${meal.readyInMinutes}"></span></div>
+                    <a th:href="@{/recipe/details}" class="button3">VIEW RECIPE 🍳</a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div id="week5" class="days" style="display: none;">
+        <div class="heading">
+            <h1 class="heading_1"> Here is delicious recipes  </h1>
+            <h1 class="heading_2">suggestion based on your </h1>
+            <h1 class="heading_3">dietary preferences</h1>
+          </div>
+          <div class="page-container">
+            <div class="row">
+              <div class="column-3" th:each="meal : ${weekresponse.week.friday.meals}">
+                <div class="recipe-card">
+                  <div class="recipe-image">
+                    <img th:src="${meal.sourceUrl}" th:alt="${meal.title}">
+                  </div>
+                  <div class="recipe-top">
+                    <h1 th:text="${meal.title}"></h1>
+                  </div>
+                  <div class="recipe-bottom3">
+                    <div class="recipe-info">Servings: <span th:text="${meal.servings}"></span></div>
+                    <div class="recipe-info">Total Time: <span th:text="${meal.readyInMinutes}"></span></div>
+                    <a th:href="@{/recipe/details}" class="button3">VIEW RECIPE 🍳</a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div id="week6" class="days" style="display: none;">
+        <div class="heading">
+            <h1 class="heading_1"> Here is delicious recipes  </h1>
+            <h1 class="heading_2">suggestion based on your </h1>
+            <h1 class="heading_3">dietary preferences</h1>
+          </div>
+          <div class="page-container">
+            <div class="row">
+              <div class="column-3" th:each="meal : ${weekresponse.week.saturday.meals}">
+                <div class="recipe-card">
+                  <div class="recipe-image">
+                    <img th:src="${meal.sourceUrl}" th:alt="${meal.title}">
+                  </div>
+                  <div class="recipe-top">
+                    <h1 th:text="${meal.title}"></h1>
+                  </div>
+                  <div class="recipe-bottom3">
+                    <div class="recipe-info">Servings: <span th:text="${meal.servings}"></span></div>
+                    <div class="recipe-info">Total Time: <span th:text="${meal.readyInMinutes}"></span></div>
+                    <a th:href="@{/recipe/details}" class="button3">VIEW RECIPE 🍳</a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div id="week7" class="days" style="display: none;">
+        <div class="heading">
+            <h1 class="heading_1"> Here is delicious recipes  </h1>
+            <h1 class="heading_2">suggestion based on your </h1>
+            <h1 class="heading_3">dietary preferences</h1>
+          </div>
+          <div class="page-container">
+            <div class="row">
+              <div class="column-3" th:each="meal : ${weekresponse.week.sunday.meals}">
+                <div class="recipe-card">
+                  <div class="recipe-image">
+                    <img th:src="${meal.sourceUrl}" th:alt="${meal.title}">
+                  </div>
+                  <div class="recipe-top">
+                    <h1 th:text="${meal.title}"></h1>
+                  </div>
+                  <div class="recipe-bottom3">
+                    <div class="recipe-info">Servings: <span th:text="${meal.servings}"></span></div>
+                    <div class="recipe-info">Total Time: <span th:text="${meal.readyInMinutes}"></span></div>
+                    <a th:href="@{/recipe/details}" class="button3">VIEW RECIPE 🍳</a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <script th:inline="javascript">
+      function showDays(weekId) {
+    console.log("inside showdyas");
+    var weeks = document.getElementsByClassName('days');
+    for (var i = 0; i < weeks.length; i++) {
+        if (weeks[i].id === weekId) {
+            console.log("inside comparis");
+            weeks[i].style.display = 'block';
+        } else {
+            
+            weeks[i].style.display = 'none';
+        }
+    }
+  }
+  </script>
+    <!-- <script th:src="@{week-list.js}"></script> -->
+</body>
+</html>

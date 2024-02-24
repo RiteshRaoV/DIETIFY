@@ -1,5 +1,6 @@
 package com.dietify.v1.Controllers;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ import com.dietify.v1.DTO.Day.Day;
 import com.dietify.v1.DTO.Day.DayResponse;
 import com.dietify.v1.DTO.Week.Week;
 import com.dietify.v1.DTO.Week.WeekResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
@@ -77,21 +79,37 @@ public class MealController {
 				.build()
 				.toUri();
 
-		ResponseEntity<WeekResponse> responseEntity = restTemplate.getForEntity(uri, WeekResponse.class);
-		if (responseEntity.getStatusCode().is2xxSuccessful()) {
-			WeekResponse weekResponse = responseEntity.getBody();
-			if (weekResponse != null ) {
-				updateMealSourceUrls(weekResponse.getWeek());
-            model.addAttribute("weekResponse", weekResponse.getWeek());
-			//model.addAllAttributes(weekResponse.getWeek());
-            System.out.println(weekResponse.getWeek());
-            return "weekresponse";
 				
-			}
-			model.addAttribute("weekResponse", weekResponse.getWeek());
-			System.out.println(weekResponse.getWeek());
-		// System.out.println(weekResponse.getWeek());
-		}
+				String jsonResponse = restTemplate.getForObject(uri, String.class);
+		// ResponseEntity<WeekResponse> responseEntity = restTemplate.getForEntity(uri, WeekResponse.class);
+
+		 String jsonString = jsonResponse; // JSON string containing the response data
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            WeekResponse weekresponse = objectMapper.readValue(jsonString, WeekResponse.class);
+		updateMealSourceUrls(weekresponse.getWeek());
+            model.addAttribute("weekresponse", weekresponse);
+			return "weeklist";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+		// if (responseEntity.getStatusCode().is2xxSuccessful()) {
+		// 	WeekResponse weekResponse = responseEntity.getBody();
+		// 	if (weekResponse != null ) {
+		// 		updateMealSourceUrls(weekResponse.getWeek());
+        //     model.addAttribute("weekresponse", weekResponse);
+		// 	//model.addAllAttributes(weekResponse.getWeek());
+        //     System.out.println(weekResponse.getWeek());
+        //     return "weekResponse";
+				
+		// 	}
+		// 	model.addAttribute("weekResponse", weekResponse.getWeek());
+		// 	System.out.println(weekResponse.getWeek());
+		// // System.out.println(weekResponse.getWeek());
+		// }
 		
 		return "errorpage";
 
