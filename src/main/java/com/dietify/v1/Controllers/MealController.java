@@ -8,16 +8,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.dietify.v1.DTO.Formdata;
 import com.dietify.v1.DTO.Day.Day;
 import com.dietify.v1.DTO.Day.DayResponse;
 import com.dietify.v1.DTO.Week.Week;
 import com.dietify.v1.DTO.Week.WeekResponse;
+
 
 
 @Controller
@@ -31,18 +35,15 @@ public class MealController {
 	@Value("${apikey}")
 	private String apiKey;
 
-	@GetMapping("/day")
-	public String getDayMeals(Model model,
-                              @RequestParam Optional<String> targetCalories,
-                              @RequestParam Optional<String> diet,
-                              @RequestParam Optional<String> exclusions){
+	@PostMapping("/day")
+	public String getDayMeals(@ModelAttribute Formdata formdata,Model model){
 		RestTemplate rt = new RestTemplate();
 
 		URI uri = UriComponentsBuilder.fromHttpUrl(baseURL)
 				.queryParam("timeFrame", "day")
-				.queryParamIfPresent("targetCalories", targetCalories)
-				.queryParamIfPresent("diet", diet)
-				.queryParamIfPresent("exclude", exclusions)
+				.queryParamIfPresent("targetCalories", Optional.ofNullable(formdata.getTargetCalories()))
+				.queryParamIfPresent("diet", Optional.ofNullable(formdata.getDiet()))
+				.queryParamIfPresent("exclude",Optional.ofNullable(formdata.getExclude()))
 				.queryParam("apiKey", apiKey)
 				.build()
 				.toUri();
@@ -62,19 +63,16 @@ public class MealController {
 		return "day-list";
 	}
 
-	@GetMapping("/week")
-	public String getWeekMeals(Model model,
-			@RequestParam(required = false) String targetCalories,
-			@RequestParam(required = false) String diet,
-			@RequestParam(required = false) String exclusions) {
+	@PostMapping("/week")
+	public String getWeekMeals(@ModelAttribute Formdata formdata,Model model) {
 
 		RestTemplate restTemplate = new RestTemplate();
 
 		URI uri = UriComponentsBuilder.fromHttpUrl(baseURL)
 				.queryParam("timeFrame", "week")
-				.queryParamIfPresent("targetCalories", Optional.ofNullable(targetCalories))
-				.queryParamIfPresent("diet", Optional.ofNullable(diet))
-				.queryParamIfPresent("exclude", Optional.ofNullable(exclusions))
+				.queryParamIfPresent("targetCalories", Optional.ofNullable(formdata.getTargetCalories()))
+				.queryParamIfPresent("diet", Optional.ofNullable(formdata.getDiet()))
+				.queryParamIfPresent("exclude",Optional.ofNullable(formdata.getExclude()))
 				.queryParam("apiKey", apiKey)
 				.build()
 				.toUri();
@@ -82,13 +80,20 @@ public class MealController {
 		ResponseEntity<WeekResponse> responseEntity = restTemplate.getForEntity(uri, WeekResponse.class);
 		if (responseEntity.getStatusCode().is2xxSuccessful()) {
 			WeekResponse weekResponse = responseEntity.getBody();
-			if (weekResponse != null && weekResponse.getWeek() != null) {
+			if (weekResponse != null ) {
 				updateMealSourceUrls(weekResponse.getWeek());
+            model.addAttribute("weekResponse", weekResponse.getWeek());
+			//model.addAllAttributes(weekResponse.getWeek());
+            System.out.println(weekResponse.getWeek());
+            return "weekresponse";
+				
 			}
-			model.addAttribute("weekResponse", weekResponse);
-
+			model.addAttribute("weekResponse", weekResponse.getWeek());
+			System.out.println(weekResponse.getWeek());
+		// System.out.println(weekResponse.getWeek());
 		}
-		return "week-list";
+		
+		return "errorpage";
 
 	}
 
@@ -97,7 +102,9 @@ public class MealController {
 				week.getThursday(), week.getFriday(), week.getSaturday(), week.getSunday() };
 		for (Day day : days) {
 			if (day != null) {
+				
 				day.getMeals().forEach(meal -> {
+					System.out.println("---------------"+meal);
 					int id = meal.getId();
 					String imageURL = "https://spoonacular.com/recipeImages/" + id + "-312x231.jpg";
 					meal.setSourceUrl(imageURL);
