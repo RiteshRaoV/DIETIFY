@@ -22,12 +22,6 @@ public class FormController {
         return "surveyform";
     }
 
-    @PostMapping("/submitform")
-    public String postMethodName(@ModelAttribute("formdata")Formdata formdata,Model model) {
-        model.addAttribute("formdata", formdata);
-      //accessing the data from jsp page
-        return "mock";
-    }
     
     
 }

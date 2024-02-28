@@ -2,6 +2,8 @@ package com.dietify.v1.Controllers;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -37,8 +39,18 @@ public class MealController {
 	@Value("${apikey}")
 	private String apiKey;
 
+	private Map<String,Object> cache=new HashMap<>();  // Cache to store data from
+
 	@PostMapping("/day")
 	public String getDayMeals(@ModelAttribute Formdata formdata,Model model){
+		if(cache.containsKey("data")){
+			DayResponse dayResponse= (DayResponse) cache.get("data");
+			model.addAttribute("dayResponse", dayResponse);
+			return "day-list";
+		}
+		else{
+
+		
 		RestTemplate rt = new RestTemplate();
 
 		URI uri = UriComponentsBuilder.fromHttpUrl(baseURL)
@@ -60,9 +72,12 @@ public class MealController {
 					meal.setSourceUrl(imageURL);
 				});
 			}
+			cache.put("data",dayResponse);
 			model.addAttribute("dayResponse", dayResponse);
 		}
 		return "day-list";
+	}
+	
 	}
 
 	@PostMapping("/week")

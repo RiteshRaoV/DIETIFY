@@ -53,7 +53,7 @@ body {
     transform: translateY(-50%);
 }
 
-.nav-link {
+.nav-linkbar {
     color: #ffffff;
     font-size: 13px;
     text-transform: uppercase;
@@ -63,7 +63,8 @@ body {
     transition: 0.4s ease;
 }
 
-.nav-link.active,
-.nav-link:hover {
+.nav-linkbar.active,
+.nav-linkbar:hover {
+    text-decoration: none;
     color: rgb(0, 0, 0);
 }
