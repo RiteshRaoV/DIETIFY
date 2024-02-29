@@ -51,8 +51,7 @@
                             </fieldset>
                             <fieldset>
                                 <div class="form-card">
-                                    <h2 class="fs-title">Calories</h2>
-                                    <label for="targetCalories">Target Calories:</label>
+                                    <h2 class="fs-title">Target Calories</h2>
                                     <input type="number" class="form-control" id="targetCalories" th:field="*{targetCalories}" required>
                                 </div>
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
@@ -61,14 +60,13 @@
                             <fieldset>
                                 <div class="form-card">
                                     <h2 class="fs-title">Diet</h2>
-                                    <label for="diet">Diet:</label>
                                     <select class="form-control" id="diet" th:field="*{diet}" required>
                                         <option value="Gluten Free">Gluten Free</option>
                                         <option value="Ketogenic">Ketogenic</option>
                                         <option value="Vegetarian">Vegetarian</option>
-                                        <option value="Vegan">Lacto-Vegetarian</option>
-                                        <option value="Vegan">Ovo-Vegetarian</option>
-                                        <option value="Vegan">Paleo</option>
+                                        <option value="Vegan">Vegan</option>
+                                        <option value="Ovo-Vegetarian">Ovo-Vegetarian</option>
+                                        <option value="Paleo">Paleo</option>
                                     </select>
                     
                                 </div>
@@ -78,18 +76,13 @@
                             <fieldset>
                                 <div class="form-card">
                                     <h2 class="fs-title">Exclude</h2>
-                                    <label for="exclude">Exclude (comma-separated):</label>
-                                     <input type="text" class="form-control" id="exclude" th:field="*{exclude}">
+                                     <input type="text" class="form-control" placeholder="comma-seperated values" id="exclude" th:field="*{exclude}">
                                 
                                 </div>
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-                                
-
-                                
-                                
+                                <button class="submitbtn" type="submit">Submit</button>
                             </fieldset>
 
-                            <button class="submitbtn" type="submit">Submit</button>
                             
                             
                         </form>
