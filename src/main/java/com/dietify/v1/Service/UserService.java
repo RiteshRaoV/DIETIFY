@@ -9,6 +9,18 @@ public interface UserService {
 
 	public User saveUser(User user);
 
+	public void getUserById(Integer userId);
+
+	public void getUserName();
+
+	public void getUserEmail();
+
+	public void getUserRole();
+
+    public void updateUser(User user);
+
+	public void deleteById(Integer userId);
+
 	public void removeSessionMessage();
 
 	public boolean existsByEmail(String email);

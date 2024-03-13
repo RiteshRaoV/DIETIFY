@@ -1,6 +1,8 @@
 package com.dietify.v1.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -102,6 +104,24 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> findAll() {
 		return userRepo.findAll();
+	}
+
+	@Override
+	public void getUserById(Integer userId) {
+		//return UserRepo.existsById(userId);
+		
+	}
+
+	@Override
+	public void updateUser(User user) {
+		//return UserRepo.save(userId);
+		
+	}
+
+	@Override
+	public void deleteById(Integer userId) {
+		//return UserRepo.deleteById(userId);
+		throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
 	}
 
 }

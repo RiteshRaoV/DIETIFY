@@ -96,13 +96,13 @@
               <td>
                 <th:block th:if="${user.role != 'ROLE_ADMIN'}">
                   <div style="display: inline-block; margin-right: 10px;">
-                      <form th:action="@{/admin/user/edit}" method="post">
-                          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                          <button type="submit" class="edit" name="id" th:value="${user.id}">
-                            <i class="fa fa-pencil" style="color: orange; font-size: 22px;" title="Edit"></i>
-                          </button>
-                      </form>
-                  </div>
+                    <form th:action="@{/admin/user/edit}" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <button type="submit" class="edit" name="id" th:value="${user.id}">
+                          <i class="fa fa-pencil" style="color: orange; font-size: 22px;" title="Edit"></i>
+                        </button>
+                    </form>
+                </div>
                   <div style="display: inline-block;">
                       <form th:action="@{/admin/user/delete}" method="post">
                           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
